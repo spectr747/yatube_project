@@ -4,4 +4,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 def group_posts(request, slug):
-    return HttpResponse(f'Название группы - {slug}')
+    template = 'posts/group_list.html'
+    title = 'Здесь будет информация о группах проекта Yatube'
+    context = {
+        'title': title,
+    }
+    return render(request, template, context)
