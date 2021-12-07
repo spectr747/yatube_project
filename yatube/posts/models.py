@@ -5,12 +5,12 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Group(models.Model):
-    def __str__(self) -> str:
-        return self.title
-
     title = models.CharField(max_length=100)
     slug = models.SlugField()
     description = models.TextField()
+
+    def __str__(self) -> str:
+        return self.title
 
 class Post(models.Model):
     text = models.TextField()
@@ -22,8 +22,12 @@ class Post(models.Model):
     )
     group = models.ForeignKey(
         Group,
+        related_name='posts',
         blank=True, 
         null=True,
         on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return self.text
 
